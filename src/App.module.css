@@ -91,3 +91,10 @@ main {
   border-top: solid 1px var(--gray-500);
   font-size: 0.875rem;
 }
+
+@media screen and (max-width: 756px) {
+  .container {
+    width: auto;
+    margin: 0 20px;
+  }
+}
