@@ -11,7 +11,7 @@ export function App() {
   const [tasks, setTasks] = useState<NewTaskType[]>([]);
   const [tasksDone, setTasksDone] = useState(0);
 
-  function handleNewTextChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleChangeNewText(event: ChangeEvent<HTMLInputElement>) {
     setNewTaskText(event.target.value);
   }
 
@@ -26,8 +26,8 @@ export function App() {
     setNewTaskText("");
   }
 
-  function onTaskDone(taskToDone: boolean) {
-    if (taskToDone) {
+  function onDoneTask(taskIsDone: boolean) {
+    if (taskIsDone) {
       setTasksDone(tasksDone + 1);
     } else {
       setTasksDone(tasksDone - 1);
@@ -55,7 +55,7 @@ export function App() {
             autoComplete="off"
             placeholder="Adicione uma nova tarefa"
             value={newTaskText}
-            onChange={handleNewTextChange}
+            onChange={handleChangeNewText}
           />
           <button
             type="submit"
@@ -73,10 +73,10 @@ export function App() {
               <span className={styles.badge}>{tasks.length}</span>
             </p>
             <p>
-              Conluídas
+              Concluídas
               <span className={styles.badge}>
                 {tasksDone}
-                {tasksDone ? " de " + tasks.length : ""}
+                {tasks.length ? " de " + tasks.length : ""}
               </span>
             </p>
           </div>
@@ -89,7 +89,7 @@ export function App() {
                   id={id}
                   text={text}
                   isDone={isDone}
-                  onTaskDone={onTaskDone}
+                  onDoneTask={onDoneTask}
                   onDeleteTask={onDeleteTask}
                 />
               );

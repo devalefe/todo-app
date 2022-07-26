@@ -3,12 +3,12 @@ import { Check, Trash } from "phosphor-react";
 import { useState } from "react";
 import { TaskType } from "../interfaces/Task";
 
-export function Task({ id, text, isDone, onTaskDone, onDeleteTask }: TaskType) {
+export function Task({ id, text, isDone, onDoneTask, onDeleteTask }: TaskType) {
   const [done, setDone] = useState(isDone);
 
-  function handleTaskDone() {
+  function handleDoneTask() {
     setDone(!done);
-    onTaskDone(!done);
+    onDoneTask(!done);
   }
 
   function handleDeleteTask() {
@@ -23,7 +23,7 @@ export function Task({ id, text, isDone, onTaskDone, onDeleteTask }: TaskType) {
         id={id}
         hidden
         checked={done}
-        onChange={handleTaskDone}
+        onChange={handleDoneTask}
       />
       <label htmlFor={id} title="Marcar como concluída">
         <Check />
