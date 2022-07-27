@@ -5,6 +5,6 @@ export interface NewTaskType {
 }
 
 export interface TaskType extends NewTaskType {
-    onDoneTask: (taskIsDone:boolean) => void;
+    onDoneTask: (taskIsDone:string) => void;
     onDeleteTask: (idOfTaskToDelete:string) => void;
 }

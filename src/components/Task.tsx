@@ -1,14 +1,10 @@
 import styles from "./Task.module.css";
 import { Check, Trash } from "phosphor-react";
-import { useState } from "react";
 import { TaskType } from "../interfaces/Task";
 
 export function Task({ id, text, isDone, onDoneTask, onDeleteTask }: TaskType) {
-  const [done, setDone] = useState(isDone);
-
-  function handleDoneTask() {
-    setDone(!done);
-    onDoneTask(!done);
+  function handleTaskDone() {
+    onDoneTask(id);
   }
 
   function handleDeleteTask() {
@@ -22,8 +18,8 @@ export function Task({ id, text, isDone, onDoneTask, onDeleteTask }: TaskType) {
         name="check"
         id={id}
         hidden
-        checked={done}
-        onChange={handleDoneTask}
+        checked={isDone}
+        onChange={handleTaskDone}
       />
       <label htmlFor={id} title="Marcar como concluída">
         <Check />

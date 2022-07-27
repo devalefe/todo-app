@@ -1,5 +1,5 @@
 import styles from "./App.module.css";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Header } from "./components/Header";
 import { PlusCircle } from "phosphor-react";
 import { Task } from "./components/Task";
@@ -26,12 +26,18 @@ export function App() {
     setNewTaskText("");
   }
 
-  function onDoneTask(taskIsDone: boolean) {
-    if (taskIsDone) {
-      setTasksDone(tasksDone + 1);
-    } else {
-      setTasksDone(tasksDone - 1);
-    }
+  function onDoneTask(taskId: string) {
+    let tasksWithDoneOne = tasks.filter((task) => {
+      if (task.id !== taskId) {
+        return task;
+      }
+      task.isDone = !task.isDone;
+      task.isDone ?
+      setTasksDone(tasksDone + 1) : 
+      setTasksDone(tasksDone - 1)
+      return task;
+    });
+    setTasks(tasksWithDoneOne);
   }
 
   function onDeleteTask(idOfTaskToDelete: string) {
