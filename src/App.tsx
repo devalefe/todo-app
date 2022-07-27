@@ -7,12 +7,12 @@ import { NewTaskType } from "./interfaces/Task";
 import { NoTasks } from "./components/NoTasks";
 import { getLocalStorage, addLocalStorage } from "./services/dataLocalStorage";
 
-const taskData = JSON.parse(getLocalStorage());
+const { tasksList, tasksDoneCount } = getLocalStorage();
 
 export function App() {
   const [newTaskText, setNewTaskText] = useState("");
-  const [tasks, setTasks] = useState<NewTaskType[]>(taskData);
-  const [tasksDone, setTasksDone] = useState(0);
+  const [tasks, setTasks] = useState<NewTaskType[]>(tasksList);
+  const [tasksDone, setTasksDone] = useState(tasksDoneCount);
 
   useEffect(() => {
     addLocalStorage(tasks);
