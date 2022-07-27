@@ -5,11 +5,18 @@ import { PlusCircle } from "phosphor-react";
 import { Task } from "./components/Task";
 import { NewTaskType } from "./interfaces/Task";
 import { NoTasks } from "./components/NoTasks";
+import { getLocalStorage, addLocalStorage } from "./services/dataLocalStorage";
+
+const taskData = JSON.parse(getLocalStorage());
 
 export function App() {
   const [newTaskText, setNewTaskText] = useState("");
-  const [tasks, setTasks] = useState<NewTaskType[]>([]);
+  const [tasks, setTasks] = useState<NewTaskType[]>(taskData);
   const [tasksDone, setTasksDone] = useState(0);
+
+  useEffect(() => {
+    addLocalStorage(tasks);
+  }, [tasks]);
 
   function handleChangeNewText(event: ChangeEvent<HTMLInputElement>) {
     setNewTaskText(event.target.value);
@@ -32,9 +39,7 @@ export function App() {
         return task;
       }
       task.isDone = !task.isDone;
-      task.isDone ?
-      setTasksDone(tasksDone + 1) : 
-      setTasksDone(tasksDone - 1)
+      task.isDone ? setTasksDone(tasksDone + 1) : setTasksDone(tasksDone - 1);
       return task;
     });
     setTasks(tasksWithDoneOne);
